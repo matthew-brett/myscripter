@@ -1,3 +1,6 @@
 *.pyc
 build/
 dist/
+venv_*
+MANIFEST
+myscripter.egg-info/
