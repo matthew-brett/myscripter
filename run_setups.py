@@ -9,10 +9,15 @@ if os.name == 'nt':
 else:
     bin_sdir = 'bin'
 
-from subprocess import check_call
+from subprocess import check_call, CalledProcessError
 
 def mycall(cmd):
     return check_call(cmd, shell=True)
+
+try:
+    mycall('virtualenv --help')
+except CalledProcessError:
+    raise RuntimeError("Need virtualenv installed")
 
 # Run setups
 mycall('python setup.py sdist --formats=zip')
