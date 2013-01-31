@@ -1,3 +1,4 @@
+#!/bin/sh
 . venv_repo/bin/activate
 myscript
 deactivate
