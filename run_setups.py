@@ -20,7 +20,7 @@ sdist = glob(pjoin('dist', '*.zip'))[0]
 mycall('python setupegg.py bdist_egg')
 egg = glob(pjoin('dist', '*.egg'))[0]
 if os.name == 'nt':
-    mycall('python setupegg.py bdist_wininst')
+    mycall('python setup.py bdist_wininst')
     exe = glob(pjoin('dist', '*.exe'))[0]
 
 def mk_venv(sdir):

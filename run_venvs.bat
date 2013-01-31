@@ -1,11 +1,14 @@
 call venv_repo\Scripts\activate.bat
-myscript
-deactivate
+call myscript
+call deactivate
 call venv_sdist\Scripts\activate.bat
-myscript
-my_console_script
-deactivate
+call myscript
+call my_console_script
+call deactivate
 call venv_egg\Scripts\activate.bat
-myscript
-my_console_script
-deactivate
+call myscript
+call my_console_script
+call deactivate
+call venv_exe\Scripts\activate.bat
+call myscript
+call deactivate
