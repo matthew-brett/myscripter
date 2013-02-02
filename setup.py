@@ -7,6 +7,7 @@ from distutils import log
 
 BAT_TEMPLATE = \
 r"""@echo off
+REM wrapper to use shebang first line of {FNAME}
 set mypath=%~dp0
 set pyscript="%mypath%{FNAME}"
 set /p line1=<%pyscript%
