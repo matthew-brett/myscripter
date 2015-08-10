@@ -4,3 +4,4 @@ dist/
 venv_*
 MANIFEST
 myscripter.egg-info/
+venv with spaces/
