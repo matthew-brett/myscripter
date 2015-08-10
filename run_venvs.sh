@@ -10,3 +10,7 @@ deactivate
 myscript
 my_console_script
 deactivate
+. "venv with spaces/bin/activate"
+myscript
+my_console_script
+deactivate

@@ -12,3 +12,6 @@ call deactivate
 call venv_exe\Scripts\activate.bat
 call myscript
 call deactivate
+call "venv with spaces\Scripts\activate.bat"
+call myscript
+call deactivate

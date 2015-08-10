@@ -1,4 +1,6 @@
 """ Run setups """
+from __future__ import print_function
+
 import os
 from os.path import join as pjoin, isdir
 import shutil
@@ -9,10 +11,13 @@ if os.name == 'nt':
 else:
     bin_sdir = 'bin'
 
-from subprocess import check_call, CalledProcessError
+from subprocess import CalledProcessError, Popen, PIPE
 
 def mycall(cmd):
-    return check_call(cmd, shell=True)
+    print('Running: ', cmd)
+    proc = Popen(cmd, stdout=PIPE, stderr=PIPE)
+    out, err = proc.communicate()
+    return out.strip()
 
 try:
     mycall('virtualenv --help')
@@ -31,7 +36,7 @@ if os.name == 'nt':
 def mk_venv(sdir):
     if isdir(sdir):
         shutil.rmtree(sdir)
-    mycall('virtualenv ' + sdir)
+    mycall('virtualenv ' + '"{0}"'.format(sdir))
     return pjoin(sdir, bin_sdir)
 
 shutil.rmtree('build')
@@ -44,3 +49,6 @@ mycall(pjoin(bin_dir, 'easy_install') + ' ' + egg)
 if os.name == 'nt':
     bin_dir = mk_venv('venv_exe')
     mycall(pjoin(bin_dir, 'easy_install') + ' ' + exe)
+# A virtualenv with spaces in the path
+bin_dir = mk_venv('venv with spaces')
+mycall('"{0}" setup.py install'.format(pjoin(bin_dir, 'python')))
