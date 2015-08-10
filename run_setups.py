@@ -20,8 +20,14 @@ def mycall(cmd):
     return out.strip()
 
 
-def plat_path(pth):
-    return '"{0}"'.format(pth) if os.name == 'nt' else pth
+def plat_pjoin(*pth_seq):
+    stripped_paths = []
+    for pth in pth_seq:
+        if pth.startswith('"') and pth.endswith('"'):
+	    pth = pth[1:-1]
+	stripped_paths.append(pth)
+    out_path = pjoin(*stripped_paths)
+    return '"{0}"'.format(out_path) if os.name == 'nt' else out_path
 
 try:
     mycall(['virtualenv', '--help'])
@@ -40,8 +46,8 @@ if os.name == 'nt':
 def mk_venv(sdir):
     if isdir(sdir):
         shutil.rmtree(sdir)
-    mycall(['virtualenv', plat_path(sdir)])
-    return plat_path(pjoin(sdir, bin_sdir))
+    mycall(['virtualenv', sdir])
+    return pjoin(sdir, bin_sdir)
 
 shutil.rmtree('build')
 bin_dir = mk_venv('venv_repo')
@@ -55,4 +61,4 @@ if os.name == 'nt':
     mycall([pjoin(bin_dir, 'easy_install'), exe])
 # A virtualenv with spaces in the path
 bin_dir = mk_venv('venv with spaces')
-mycall([plat_path(pjoin(bin_dir, 'python')), 'setup.py', 'install'])
+mycall([pjoin(bin_dir, 'python'), 'setup.py', 'install'])
