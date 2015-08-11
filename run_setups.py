@@ -49,16 +49,20 @@ def mk_venv(sdir):
     mycall(['virtualenv', sdir])
     return pjoin(sdir, bin_sdir)
 
-shutil.rmtree('build')
-bin_dir = mk_venv('venv_repo')
+def new_venv(sdir):
+    if isdir('build'):
+        shutil.rmtree('build')
+    return mk_venv(sdir)
+
+bin_dir = new_venv('venv_repo')
 mycall([pjoin(bin_dir, 'python'), 'setup.py', 'install'])
-bin_dir = mk_venv('venv_sdist')
+bin_dir = new_venv('venv_sdist')
 mycall([pjoin(bin_dir, 'easy_install'), sdist])
-bin_dir = mk_venv('venv_egg')
+bin_dir = new_venv('venv_egg')
 mycall([pjoin(bin_dir, 'easy_install'), egg])
 if os.name == 'nt':
-    bin_dir = mk_venv('venv_exe')
+    bin_dir = new_venv('venv_exe')
     mycall([pjoin(bin_dir, 'easy_install'), exe])
 # A virtualenv with spaces in the path
-bin_dir = mk_venv('venv with spaces')
+bin_dir = new_venv('venv with spaces')
 mycall([pjoin(bin_dir, 'python'), 'setup.py', 'install'])
