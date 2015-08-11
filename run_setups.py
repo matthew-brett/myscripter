@@ -63,6 +63,7 @@ mycall([pjoin(bin_dir, 'easy_install'), egg])
 if os.name == 'nt':
     bin_dir = new_venv('venv_exe')
     mycall([pjoin(bin_dir, 'easy_install'), exe])
-# A virtualenv with spaces in the path
-bin_dir = new_venv('venv with spaces')
-mycall([pjoin(bin_dir, 'python'), 'setup.py', 'install'])
+    # A virtualenv with spaces in the path
+    # This does not work for Unices
+    bin_dir = new_venv('venv with spaces')
+    mycall([pjoin(bin_dir, 'python'), 'setup.py', 'install'])
