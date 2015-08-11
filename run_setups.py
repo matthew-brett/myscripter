@@ -24,8 +24,8 @@ def plat_pjoin(*pth_seq):
     stripped_paths = []
     for pth in pth_seq:
         if pth.startswith('"') and pth.endswith('"'):
-	    pth = pth[1:-1]
-	stripped_paths.append(pth)
+            pth = pth[1:-1]
+        stripped_paths.append(pth)
     out_path = pjoin(*stripped_paths)
     return '"{0}"'.format(out_path) if os.name == 'nt' else out_path
 
